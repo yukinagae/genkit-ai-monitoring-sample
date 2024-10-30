@@ -4,12 +4,21 @@ import { noAuth, onFlow } from '@genkit-ai/firebase/functions'
 import { gemini15Flash, googleAI } from '@genkit-ai/googleai'
 import * as z from 'zod'
 
+// Import the Firebase plugin into your Genkit configuration file (where configureGenkit is located):
+import { firebase } from '@genkit-ai/firebase'
+
+// Add `firebase()` to the list of plugins and add additional configuration options:
 configureGenkit({
   plugins: [
     googleAI(), //
+    firebase(), //
   ],
   logLevel: 'debug',
   enableTracingAndMetrics: true,
+  telemetry: {
+    instrumentation: 'firebase',
+    logger: 'firebase',
+  },
 })
 
 export const menuSuggestionFlow = onFlow(
