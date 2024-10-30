@@ -1,0 +1,32 @@
+{
+  "name": "genkit-ai-monitoring-sample",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "author": "yukinagae <yuki.nagae1130@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "check": "biome check ./src",
+    "fix": "biome check --write ./src",
+    "emulator": "npm run build && GENKIT_ENV=dev firebase emulators:start --inspect-functions",
+    "kill": "lsof -i:3000,3100,3400,4000,4001,4400,5001,5050,8080,8085,9099,9199 -t | xargs kill",
+    "deploy": "npm run build && firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "@genkit-ai/ai": "^0.5.17",
+    "@genkit-ai/core": "^0.5.17",
+    "@genkit-ai/firebase": "^0.5.17",
+    "@genkit-ai/googleai": "^0.5.17",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}
